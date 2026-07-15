@@ -128,7 +128,7 @@
   .section-head h2 { margin: 0; color: #b015a6; font-family: var(--retro-font); font-size: 32px; letter-spacing: -0.01em; text-shadow: var(--text-raise); }
   .section-head p { margin: 3px 0 0; color: var(--muted); font-family: var(--computer-font); font-size: 12px; font-weight: 700; }
   .spectrum-dot { width: 29px; height: 29px; border: 2px solid #fffaff; border-radius: 50%; background: conic-gradient(#72e5ff, #8fb7ff, #b38eff, #ff91d7, #ffae9d, #72e5ff); box-shadow: 0 3px 0 rgba(93,69,169,0.35), 0 0 16px rgba(255,136,214,0.5); }
-  .class-timeline-scroll { overflow-x: auto; padding: 12px; background: linear-gradient(135deg, rgba(255,255,255,0.62), rgba(224,237,255,0.72) 60%, rgba(255,229,245,0.72)); }
+  .class-timeline-scroll { overflow-x: hidden; padding: 12px; background: linear-gradient(135deg, rgba(255,255,255,0.62), rgba(224,237,255,0.72) 60%, rgba(255,229,245,0.72)); }
   .class-schedule-grid {
     display: grid; grid-template-rows: 42px var(--timeline-height); min-width: 2080px;
     position: relative; border: 2px ridge #e0dbff; border-radius: 10px; overflow: hidden;
@@ -3829,9 +3829,15 @@
 
       if (timeline) timeline.hidden = shown === 0;
       grid.dataset.visibleClassCount = String(shown);
+      const naturalWidth = Math.max(480, 94 + shown * 148);
       grid.style.gridTemplateColumns =
         `minmax(80px, 94px) repeat(${Math.max(shown, 1)}, minmax(148px, 1fr))`;
-      grid.style.minWidth = `${Math.max(480, 94 + shown * 148)}px`;
+      grid.style.minWidth = `${naturalWidth}px`;
+      grid.style.width = '';
+      grid.style.zoom = '1';
+      if (timeline && timeline.clientWidth) {
+        grid.style.zoom = String(Math.min(1, timeline.clientWidth / naturalWidth));
+      }
     });
   }
 
@@ -3911,6 +3917,7 @@
     });
   });
   filter.addEventListener('toggle', updateFilterToggle);
+  window.addEventListener('resize', updateClassColumns);
 
   window.addEventListener('calendar-focus-bookings', (event) => {
     const bookingIds = new Set((event.detail && event.detail.bookingIds) || []);
