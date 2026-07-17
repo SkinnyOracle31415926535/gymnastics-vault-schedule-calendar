@@ -131,7 +131,7 @@
   .spectrum-dot { width: 29px; height: 29px; border: 2px solid #fffaff; border-radius: 50%; background: conic-gradient(#72e5ff, #8fb7ff, #b38eff, #ff91d7, #ffae9d, #72e5ff); box-shadow: 0 3px 0 rgba(93,69,169,0.35), 0 0 16px rgba(255,136,214,0.5); }
   .class-timeline-scroll { min-width: 0; overflow: visible; padding: 12px; background: linear-gradient(135deg, rgba(255,255,255,0.62), rgba(224,237,255,0.72) 60%, rgba(255,229,245,0.72)); }
   .class-schedule-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); column-gap: 0; row-gap: 12px;
     width: 100%; min-width: 0; max-width: 100%;
   }
   .class-track { min-width: 0; overflow: hidden; border: 2px ridge #e0dbff; border-radius: 10px; background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(228,238,255,0.72) 54%, rgba(255,231,246,0.66)); box-shadow: 0 4px 12px rgba(88,63,157,0.16); }
@@ -215,7 +215,7 @@
     .class-filter-actions button { flex: 1 1 0; }
     .class-options { grid-template-columns: 1fr; max-height: 14rem; }
     .class-timeline-scroll { padding: 8px; }
-    .class-schedule-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+    .class-schedule-grid { grid-template-columns: minmax(0, 1fr); column-gap: 0; row-gap: 10px; }
     .class-head { padding: 9px 10px; font-size: 18px; }
     .session-block { grid-template-columns: minmax(68px, 0.5fr) minmax(0, 1fr); padding: 9px 33px 9px 9px; }
     .source-only table, .source-only tbody, .source-only tr, .source-only td { display: block; width: 100%; }
