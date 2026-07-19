@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Summer 2026 schedule</title>
 <style>
   :root {
@@ -3770,27 +3770,6 @@
 <script>
 (() => {
   const rule = {"timezone":"America/Los_Angeles","week_start":"monday","odd_week_numbers":[1,3],"even_week_numbers":[2,4],"manual_confirmation_from_week":5,"rule_id":"vault_default","schedule_id":null,"week_end":"sunday","month_week_anchor":"monday_sunday_week_containing_month_day_1","overflow_week_behavior":"manual_confirmation_required","notes":"Vault default: weeks 1 and 3 select Odd; weeks 2 and 4 select Even. Week 5 or later requires manual confirmation; ordinal parity is only a suggestion."};
-  const stopZoom = (event) => event.preventDefault();
-  document.addEventListener('gesturestart', stopZoom, { passive: false });
-  document.addEventListener('gesturechange', stopZoom, { passive: false });
-  document.addEventListener('gestureend', stopZoom, { passive: false });
-  document.addEventListener('dblclick', (event) => {
-    const target = event.target;
-    if (target && typeof target.closest === 'function' &&
-        target.closest('[data-collision-audit-trigger]')) return;
-    stopZoom(event);
-  }, { passive: false });
-  document.addEventListener('touchmove', (event) => {
-    if (event.touches.length > 1) event.preventDefault();
-  }, { passive: false });
-  document.addEventListener('wheel', (event) => {
-    if (event.ctrlKey || event.metaKey) event.preventDefault();
-  }, { passive: false });
-  document.addEventListener('keydown', (event) => {
-    if ((event.ctrlKey || event.metaKey) && ['+', '-', '=', '0'].includes(event.key)) {
-      event.preventDefault();
-    }
-  });
   const weekdayIndex = { Mon: 0, Tue: 1, Wed: 2, Thu: 3, Fri: 4, Sat: 5, Sun: 6 };
   const weekdayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   const scheduleDay = { Mon: 'Mon', Tue: 'Tues', Wed: 'Wed', Thu: 'Thurs', Fri: 'Fri', Sat: 'Sat' };
