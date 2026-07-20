@@ -129,24 +129,28 @@
   .section-head h2 { margin: 0; color: #b015a6; font-family: var(--retro-font); font-size: 32px; letter-spacing: -0.01em; text-shadow: var(--text-raise); }
   .section-head p { margin: 3px 0 0; color: var(--muted); font-family: var(--computer-font); font-size: 12px; font-weight: 700; }
   .spectrum-dot { width: 29px; height: 29px; border: 2px solid #fffaff; border-radius: 50%; background: conic-gradient(#72e5ff, #8fb7ff, #b38eff, #ff91d7, #ffae9d, #72e5ff); box-shadow: 0 3px 0 rgba(93,69,169,0.35), 0 0 16px rgba(255,136,214,0.5); }
-  .class-timeline-scroll { min-width: 0; overflow: visible; padding: 12px; background: linear-gradient(135deg, rgba(255,255,255,0.62), rgba(224,237,255,0.72) 60%, rgba(255,229,245,0.72)); }
+  .class-timeline-scroll { display: grid; grid-template-columns: 72px minmax(0, 1fr); min-width: 0; overflow-x: auto; overflow-y: visible; padding: 12px; background: linear-gradient(135deg, rgba(255,255,255,0.62), rgba(224,237,255,0.72) 60%, rgba(255,229,245,0.72)); }
+  .class-time-axis { position: sticky; left: 0; z-index: 4; min-width: 72px; height: calc(var(--class-head-height) + var(--timeline-height)); border: 2px ridge #e0dbff; background: linear-gradient(180deg, #fffdf6, #e5f7ff); }
+  .class-time-axis::before { content: "TIME"; display: grid; place-items: center; height: var(--class-head-height); border-bottom: 2px solid rgba(133,109,214,0.5); color: #301866; font: 900 11px/1 var(--computer-font); }
+  .class-time-label { position: absolute; right: 5px; transform: translateY(-50%); color: #432467; font: 900 10px/1 var(--computer-font); white-space: nowrap; }
   .class-schedule-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); column-gap: 0; row-gap: 12px;
-    width: 100%; min-width: 0; max-width: 100%;
+    --class-head-height: 46px;
+    display: grid; grid-template-columns: repeat(var(--visible-class-count, 1), minmax(94px, 1fr)); gap: 0;
+    width: max-content; min-width: 100%;
   }
-  .class-track { min-width: 0; overflow: hidden; border: 2px ridge #e0dbff; border-radius: 10px; background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(228,238,255,0.72) 54%, rgba(255,231,246,0.66)); box-shadow: 0 4px 12px rgba(88,63,157,0.16); }
-  .class-head { min-width: 0; margin: 0; padding: 10px 12px; color: #301866; background: linear-gradient(180deg, #ffffff 0%, #8ceaff 24%, #a990ff 58%, #ff91d7 100%); border-bottom: 2px solid rgba(133,109,214,0.5); font-family: var(--retro-font); font-size: 20px; font-weight: 900; letter-spacing: -0.02em; overflow-wrap: anywhere; text-align: center; text-shadow: 0 1px 0 rgba(255,255,255,0.9), 0 2px 3px rgba(65,37,130,0.24); box-shadow: 0 2px 0 rgba(255,255,255,0.82) inset, 0 -3px 0 rgba(96,72,185,0.32) inset; }
+  .class-track { position: relative; min-width: 0; height: calc(var(--class-head-height) + var(--timeline-height)); overflow: visible; border: 1px solid rgba(113,89,192,0.35); border-radius: 0; background: repeating-linear-gradient(to bottom, transparent 0 180px, rgba(113,89,192,0.2) 180px 181px), linear-gradient(180deg, rgba(255,255,255,0.9), rgba(228,238,255,0.72) 54%, rgba(255,231,246,0.66)); box-shadow: none; }
+  .class-head { display: grid; place-items: center; min-width: 0; height: var(--class-head-height); box-sizing: border-box; margin: 0; padding: 6px 4px; color: #301866; background: linear-gradient(180deg, #ffffff 0%, #8ceaff 24%, #a990ff 58%, #ff91d7 100%); border-bottom: 2px solid rgba(133,109,214,0.5); font-family: var(--retro-font); font-size: 18px; font-weight: 900; letter-spacing: -0.02em; overflow-wrap: anywhere; text-align: center; text-shadow: 0 1px 0 rgba(255,255,255,0.9), 0 2px 3px rgba(65,37,130,0.24); box-shadow: 0 2px 0 rgba(255,255,255,0.82) inset, 0 -3px 0 rgba(96,72,185,0.32) inset; cursor: pointer; touch-action: manipulation; }
+  .class-head:focus-visible, .session-time:focus-visible { outline: 3px solid #fff7a8; outline-offset: -3px; }
   .session-block {
-    position: relative; display: grid; grid-template-columns: minmax(72px, 0.6fr) minmax(0, 1fr); column-gap: 9px;
-    min-width: 0; padding: 10px 34px 10px 10px; border: 0; border-top: 1px solid rgba(113,89,192,0.2); border-left: 4px solid rgba(255,255,238,0.94);
+    position: absolute; left: 2px; right: 2px; box-sizing: border-box;
+    min-width: 0; padding: 4px 18px 4px 5px; border: 0; border-left: 3px solid rgba(255,255,238,0.94);
     background: linear-gradient(135deg, var(--c1), var(--c2)); color: #140b2c; font-family: var(--display); line-height: 1.15;
     box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset;
   }
-  .session-time { grid-row: 1 / span 3; min-width: 0; align-self: start; color: #432467; font-family: var(--computer-font); font-size: 11px; font-weight: 950; line-height: 1.2; overflow-wrap: anywhere; }
-  .session-block > strong, .session-block > span, .session-block > em { grid-column: 2; min-width: 0; display: block; overflow-wrap: anywhere; }
-  .session-block > strong { font-size: 13px; font-weight: 950; letter-spacing: -0.02em; }
-  .session-block > span { margin-top: 2px; font-size: 11px; font-weight: 800; opacity: 0.92; }
-  .session-block > em { margin-top: 2px; color: #50366f; font-family: var(--computer-font); font-size: 10px; font-style: normal; font-weight: 850; opacity: 0.9; }
+  .session-time { display: block; min-width: 0; color: #432467; font-family: var(--computer-font); font-size: 10px; font-weight: 950; line-height: 1.1; overflow-wrap: anywhere; cursor: pointer; touch-action: manipulation; }
+  .session-block > strong, .session-block > span, .session-block > em { min-width: 0; display: block; overflow-wrap: anywhere; }
+  .session-block > strong { margin-top: 2px; font-size: 11px; font-weight: 950; letter-spacing: -0.02em; }
+  .session-block > span, .session-block > em { display: none; }
   .session-block.activity-warmup { filter: saturate(0.72) brightness(1.08); }
   .session-block.activity-conditioning { background: linear-gradient(135deg, #f8efff, #b8e9ff); }
   .session-block.is-source-only { border-style: dashed; background: linear-gradient(135deg, #f7edff, #b8e9ff); }
@@ -214,10 +218,11 @@
     .class-filter-actions { width: 100%; }
     .class-filter-actions button { flex: 1 1 0; }
     .class-options { grid-template-columns: 1fr; max-height: 14rem; }
-    .class-timeline-scroll { padding: 8px; }
-    .class-schedule-grid { grid-template-columns: minmax(0, 1fr); column-gap: 0; row-gap: 10px; }
-    .class-head { padding: 9px 10px; font-size: 18px; }
-    .session-block { grid-template-columns: minmax(68px, 0.5fr) minmax(0, 1fr); padding: 9px 33px 9px 9px; }
+    .class-timeline-scroll { grid-template-columns: 56px minmax(0, 1fr); padding: 8px; }
+    .class-time-axis { min-width: 56px; }
+    .class-schedule-grid { grid-template-columns: repeat(var(--visible-class-count, 1), minmax(76px, 1fr)); gap: 0; }
+    .class-head { padding: 5px 2px; font-size: 14px; }
+    .session-block { padding: 3px 14px 3px 4px; }
     .source-only table, .source-only tbody, .source-only tr, .source-only td { display: block; width: 100%; }
     .source-only thead { display: none; }
     .source-only tr { padding: 6px 0; border-bottom: 1px solid rgba(113,89,192,0.18); }
@@ -3291,7 +3296,103 @@
   const filterToggles = Array.from(
     document.querySelectorAll('[data-class-filter-toggle]')
   );
+  const classHeads = Array.from(document.querySelectorAll('.class-head[data-class-lane]'));
+  const sessionTimes = Array.from(document.querySelectorAll('.session-time'));
   const total = checkboxes.length;
+  let focusedTrack = null;
+
+  function setClassHeadState(selectedHead = null) {
+    classHeads.forEach((head) => {
+      const selected = head === selectedHead;
+      head.setAttribute('aria-pressed', String(selected));
+      head.setAttribute(
+        'aria-label',
+        selected ? `Showing only ${head.dataset.classLane}. Click again to show all classes.` : `Show only ${head.dataset.classLane}.`
+      );
+    });
+  }
+
+  function focusClass(track) {
+    const day = track.closest('[data-class-day]');
+    if (!day) return;
+    day.querySelectorAll('.class-track[data-class-lane]').forEach((candidate) => {
+      candidate.hidden = candidate !== track;
+    });
+    const grid = day.querySelector('[data-class-schedule-grid]');
+    if (grid) grid.style.setProperty('--visible-class-count', '1');
+    focusedTrack = track;
+    setClassHeadState(track.querySelector('.class-head[data-class-lane]'));
+  }
+
+  function showAllClasses() {
+    focusedTrack = null;
+    checkboxes.forEach((checkbox) => { checkbox.checked = true; });
+    applyFilter();
+    setClassHeadState();
+  }
+
+  function minutesFromTime(value) {
+    const match = /([0-9]{1,2}):([0-9]{2})\s*(AM|PM)/i.exec(value);
+    if (!match) return null;
+    let hour = Number(match[1]) % 12;
+    if (match[3].toUpperCase() === 'PM') hour += 12;
+    return (hour * 60) + Number(match[2]);
+  }
+
+  function formatTime(minutes) {
+    const hour = Math.floor(minutes / 60);
+    const minute = minutes % 60;
+    const suffix = hour >= 12 ? 'PM' : 'AM';
+    return `${((hour + 11) % 12) + 1}:${String(minute).padStart(2, '0')}${suffix}`;
+  }
+
+  function buildTimeGrids() {
+    const pixelsPerMinute = 6;
+    const headHeight = 46;
+    days.forEach((day) => {
+      const timeline = day.querySelector('[data-class-timeline]');
+      const grid = day.querySelector('[data-class-schedule-grid]');
+      if (!timeline || !grid) return;
+      const entries = Array.from(day.querySelectorAll('.session-block')).map((block) => {
+        const timeText = block.querySelector('.session-time')?.textContent || '';
+        const times = Array.from(timeText.matchAll(/([0-9]{1,2}):([0-9]{2})\s*(AM|PM)/gi))
+          .map((match) => minutesFromTime(match[0]))
+          .filter((time) => time !== null);
+        return { block, start: times[0], end: times[1] };
+      }).filter((entry) => entry.start !== undefined && entry.end !== undefined);
+      if (!entries.length) return;
+
+      const start = Math.floor(Math.min(...entries.map((entry) => entry.start)) / 30) * 30;
+      const end = Math.ceil(Math.max(...entries.map((entry) => entry.end)) / 30) * 30;
+      const height = Math.max(240, (end - start) * pixelsPerMinute);
+      timeline.style.setProperty('--class-head-height', `${headHeight}px`);
+      timeline.style.setProperty('--timeline-height', `${height}px`);
+      grid.style.setProperty('--class-head-height', `${headHeight}px`);
+      grid.style.setProperty('--timeline-height', `${height}px`);
+
+      let axis = timeline.querySelector('.class-time-axis');
+      if (!axis) {
+        axis = document.createElement('aside');
+        axis.className = 'class-time-axis';
+        axis.setAttribute('aria-label', 'Schedule times');
+        timeline.insertBefore(axis, grid);
+      }
+      axis.replaceChildren();
+      for (let time = start; time <= end; time += 30) {
+        const label = document.createElement('time');
+        label.className = 'class-time-label';
+        label.dateTime = `${String(Math.floor(time / 60)).padStart(2, '0')}:${String(time % 60).padStart(2, '0')}`;
+        label.textContent = formatTime(time);
+        label.style.top = `${headHeight + ((time - start) * pixelsPerMinute)}px`;
+        axis.appendChild(label);
+      }
+      entries.forEach(({ block, start: blockStart, end: blockEnd }) => {
+        block.style.top = `${headHeight + ((blockStart - start) * pixelsPerMinute)}px`;
+        block.style.height = `${Math.max(48, (blockEnd - blockStart) * pixelsPerMinute)}px`;
+        block.style.overflow = 'hidden';
+      });
+    });
+  }
 
   function updateClassColumns() {
     days.forEach((day) => {
@@ -3313,6 +3414,7 @@
 
       if (timeline) timeline.hidden = shown === 0;
       grid.dataset.visibleClassCount = String(shown);
+      grid.style.setProperty('--visible-class-count', String(shown));
     });
   }
 
@@ -3346,6 +3448,10 @@
     updateClassColumns();
     updateDayCounts();
     updateSummary(selected.size);
+    if (focusedTrack && focusedTrack.hidden) {
+      focusedTrack = null;
+      setClassHeadState();
+    }
   }
 
   function narrowChoices() {
@@ -3369,6 +3475,39 @@
   }
 
   checkboxes.forEach((checkbox) => checkbox.addEventListener('change', applyFilter));
+  classHeads.forEach((head) => {
+    head.setAttribute('role', 'button');
+    head.setAttribute('tabindex', '0');
+    head.setAttribute('aria-pressed', 'false');
+    head.setAttribute('aria-label', `Show only ${head.dataset.classLane}.`);
+    const activate = () => {
+      const track = head.closest('.class-track[data-class-lane]');
+      if (track === focusedTrack) {
+        showAllClasses();
+      } else {
+        focusClass(track);
+      }
+    };
+    head.addEventListener('click', activate);
+    head.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        activate();
+      }
+    });
+  });
+  sessionTimes.forEach((time) => {
+    time.setAttribute('role', 'button');
+    time.setAttribute('tabindex', '0');
+    time.setAttribute('aria-label', 'Show all classes.');
+    time.addEventListener('click', showAllClasses);
+    time.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        showAllClasses();
+      }
+    });
+  });
   if (search) search.addEventListener('input', narrowChoices);
   if (showAll) {
     showAll.addEventListener('click', () => {
@@ -3409,6 +3548,7 @@
     applyFilter();
   });
 
+  buildTimeGrids();
   applyFilter();
   updateFilterToggle();
 })();
