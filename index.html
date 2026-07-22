@@ -241,49 +241,111 @@
   @media print { @page { size: landscape; margin: 0.28in; } body { background: #fff; color: #111; } .topbar { position: static; background: #fff; color: #111; } .topbar::after { height: 3px; } .subtitle { color: #333; } .controls, .class-filter { display: none; } main, .top-inner { max-width: none; padding-left: 0; padding-right: 0; } html.day-picker-ready .day-section[data-sheet] { display: block !important; } .day-section { break-before: page; box-shadow: none; background: #fff; } .day-section:first-of-type { break-before: auto; } .class-timeline-scroll { overflow: visible; } }
 
 .session-block {
-  transform: translateY(-2px);
+  --card-fill: color-mix(in srgb, var(--c1) 68%, #ffffff 32%);
+  --card-shadow: color-mix(in srgb, var(--c2) 78%, #ffffff 22%);
+  --card-border: color-mix(in srgb, var(--c1) 72%, #7650a8 28%);
+  --card-deep: color-mix(in srgb, var(--c1) 58%, #6d4b9f 42%);
+  border-top-color: rgba(255,255,255,0.99);
+  border-left-color: rgba(255,255,255,0.92);
+  border-right-color: var(--card-deep);
+  border-bottom-color: var(--card-deep);
+  border-radius: 9px;
+  background-color: var(--card-fill);
+  background-image:
+    radial-gradient(
+      ellipse at 20% 4%,
+      rgba(255,255,255,1) 0 8%,
+      rgba(255,255,255,0.82) 12%,
+      rgba(255,255,255,0.22) 27%,
+      transparent 44%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.98) 0%,
+      rgba(255,255,255,0.72) 8%,
+      rgba(255,255,255,0.18) 32%,
+      transparent 50%
+    ),
+    linear-gradient(
+      102deg,
+      rgba(255,255,255,0.48) 0%,
+      rgba(255,255,255,0.12) 30%,
+      transparent 52%,
+      rgba(93,54,151,0.18) 100%
+    ),
+    linear-gradient(
+      160deg,
+      var(--card-fill) 0%,
+      color-mix(in srgb, var(--card-fill) 82%, #ffffff 18%) 52%,
+      var(--card-shadow) 100%
+    );
+  transform: translateY(-3px);
   box-shadow:
     0 3px 0 rgba(255,255,255,0.98) inset,
-    0 -5px 0 rgba(48,36,112,0.36) inset,
-    3px 0 0 rgba(255,255,255,0.48) inset,
-    -3px 0 0 rgba(44,27,100,0.18) inset,
-    0 6px 0 var(--card-deep, #5a3a82),
-    0 8px 0 rgba(44,27,100,0.26),
-    0 12px 16px rgba(31,19,76,0.44),
-    0 0 11px rgba(255,255,255,0.34);
+    0 8px 4px -5px rgba(255,255,255,0.96) inset,
+    0 -7px 0 rgba(67,36,124,0.24) inset,
+    4px 0 0 rgba(255,255,255,0.46) inset,
+    -4px 0 0 rgba(74,38,135,0.13) inset,
+    0 7px 0 var(--card-deep),
+    0 10px 0 rgba(80,53,132,0.24),
+    0 15px 20px rgba(54,33,103,0.38),
+    0 0 14px rgba(255,255,255,0.58);
 }
 
 .session-block::before {
-  height: 48%;
+  top: 2px;
+  left: 5px;
+  right: 7px;
+  height: 54%;
+  border-radius: 7px 7px 45% 45%;
   background: linear-gradient(
     180deg,
-    rgba(255,255,255,0.94),
-    rgba(255,255,255,0.10)
+    rgba(255,255,255,0.98) 0%,
+    rgba(255,255,255,0.68) 18%,
+    rgba(255,255,255,0.14) 72%,
+    transparent 100%
   );
+  box-shadow: 0 1px 0 rgba(255,255,255,0.92) inset;
 }
 
 .session-block::after {
-  height: 6px;
-  background: rgba(34,18,82,0.34);
-  box-shadow: 0 -1px 0 rgba(255,255,255,0.26);
+  bottom: 3px;
+  height: 7px;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.28),
+    rgba(62,30,119,0.32) 48%,
+    rgba(255,255,255,0.18)
+  );
+  box-shadow:
+    0 -1px 0 rgba(255,255,255,0.45),
+    0 2px 2px rgba(46,24,92,0.16) inset;
 }
 
 .session-block.is-source-only {
-  --card-fill: #fff2a6;
-  --card-shadow: #e4b950;
-  --card-border: #d59c27;
-  --card-deep: #8f5a14;
+  --card-fill: #fff6a8;
+  --card-shadow: #ffd28c;
+  --card-border: #efb04c;
+  --card-deep: #c3783b;
   border-style: dotted;
-  background-color: #fff2a6;
+  background-color: var(--card-fill);
 }
 
 .session-block.is-collision {
   box-shadow:
     0 3px 0 rgba(255,255,255,0.98) inset,
-    0 -5px 0 rgba(48,36,112,0.36) inset,
-    0 6px 0 #9d7c35,
-    0 8px 0 rgba(122,76,29,0.26),
-    0 12px 16px rgba(31,19,76,0.44);
+    0 8px 4px -5px rgba(255,255,255,0.96) inset,
+    0 -7px 0 rgba(48,36,112,0.3) inset,
+    4px 0 0 rgba(255,255,255,0.42) inset,
+    -4px 0 0 rgba(74,38,135,0.13) inset,
+    0 7px 0 #9d7c35,
+    0 10px 0 rgba(122,76,29,0.24),
+    0 15px 20px rgba(54,33,103,0.38),
+    0 0 14px rgba(255,255,255,0.5);
+}
+
+.session-block.activity-warmup {
+  filter: saturate(1.12) brightness(1.02);
 }
 </style>
   <!-- Gymnastics Vault icon -->
