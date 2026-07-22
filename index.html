@@ -134,12 +134,13 @@
   .class-time-axis { position: sticky; left: 0; z-index: 4; min-width: 72px; height: calc(var(--class-head-height) + var(--timeline-height)); border: 2px ridge #e0dbff; background: linear-gradient(180deg, #fffdf6, #e5f7ff); }
   .class-time-axis::before { content: "TIME"; display: grid; place-items: center; height: var(--class-head-height); border-bottom: 2px solid rgba(133,109,214,0.5); color: #301866; font: 900 11px/1 var(--table-font); }
   .class-time-label { position: absolute; right: 5px; transform: translateY(-50%); color: #432467; font: 900 10px/1 var(--table-font); white-space: nowrap; }
+  .class-time-label.is-first-time-label { transform: translateY(3px); }
   .class-schedule-grid {
     --class-head-height: 46px;
     display: grid; grid-template-columns: repeat(var(--visible-class-count, 1), minmax(94px, 1fr)); gap: 0;
     width: max-content; min-width: 100%;
   }
-  .class-track { position: relative; min-width: 0; height: calc(var(--class-head-height) + var(--timeline-height)); overflow: visible; border: 1px solid rgba(113,89,192,0.35); border-radius: 0; background: repeating-linear-gradient(to bottom, transparent 0 180px, rgba(113,89,192,0.2) 180px 181px), linear-gradient(180deg, rgba(255,255,255,0.9), rgba(228,238,255,0.72) 54%, rgba(255,231,246,0.66)); box-shadow: none; }
+  .class-track { position: relative; min-width: 0; height: calc(var(--class-head-height) + var(--timeline-height)); overflow: visible; border: 1px solid rgba(113,89,192,0.35); border-radius: 0; background-image: linear-gradient(to bottom, rgba(113,89,192,0.2) 0 1px, transparent 1px), linear-gradient(180deg, rgba(255,255,255,0.9), rgba(228,238,255,0.72) 54%, rgba(255,231,246,0.66)); background-size: 100% var(--time-grid-step, 180px), 100% 100%; background-position: 0 var(--class-head-height), 0 0; background-repeat: repeat-y, no-repeat; box-shadow: none; }
   .class-head { display: grid; place-items: center; min-width: 0; height: var(--class-head-height); box-sizing: border-box; margin: 0; padding: 6px 4px; color: #301866; background: linear-gradient(180deg, #ffffff 0%, #8ceaff 24%, #a990ff 58%, #ff91d7 100%); border-bottom: 2px solid rgba(133,109,214,0.5); font-family: var(--table-font); font-size: 18px; font-weight: 900; letter-spacing: -0.02em; overflow-wrap: anywhere; text-align: center; text-shadow: 0 1px 0 rgba(255,255,255,0.9), 0 2px 3px rgba(65,37,130,0.24); box-shadow: 0 2px 0 rgba(255,255,255,0.82) inset, 0 -3px 0 rgba(96,72,185,0.32) inset; cursor: pointer; touch-action: manipulation; }
   .class-head:focus-visible, .session-time:focus-visible { outline: 3px solid #fff7a8; outline-offset: -3px; }
   .session-block {
@@ -3366,10 +3367,13 @@
       const start = Math.floor(Math.min(...entries.map((entry) => entry.start)) / 30) * 30;
       const end = Math.ceil(Math.max(...entries.map((entry) => entry.end)) / 30) * 30;
       const height = Math.max(240, (end - start) * pixelsPerMinute);
+      const gridStep = 30 * pixelsPerMinute;
       timeline.style.setProperty('--class-head-height', `${headHeight}px`);
       timeline.style.setProperty('--timeline-height', `${height}px`);
+      timeline.style.setProperty('--time-grid-step', `${gridStep}px`);
       grid.style.setProperty('--class-head-height', `${headHeight}px`);
       grid.style.setProperty('--timeline-height', `${height}px`);
+      grid.style.setProperty('--time-grid-step', `${gridStep}px`);
 
       let axis = timeline.querySelector('.class-time-axis');
       if (!axis) {
@@ -3382,6 +3386,7 @@
       for (let time = start; time <= end; time += 30) {
         const label = document.createElement('time');
         label.className = 'class-time-label';
+        if (time === start) label.classList.add('is-first-time-label');
         label.dateTime = `${String(Math.floor(time / 60)).padStart(2, '0')}:${String(time % 60).padStart(2, '0')}`;
         label.textContent = formatTime(time);
         label.style.top = `${headHeight + ((time - start) * pixelsPerMinute)}px`;
