@@ -239,6 +239,52 @@
     .source-only td::before { content: attr(data-label); color: #5f45ad; font-family: var(--computer-font); font-size: 10px; font-weight: 900; text-transform: uppercase; }
   }
   @media print { @page { size: landscape; margin: 0.28in; } body { background: #fff; color: #111; } .topbar { position: static; background: #fff; color: #111; } .topbar::after { height: 3px; } .subtitle { color: #333; } .controls, .class-filter { display: none; } main, .top-inner { max-width: none; padding-left: 0; padding-right: 0; } html.day-picker-ready .day-section[data-sheet] { display: block !important; } .day-section { break-before: page; box-shadow: none; background: #fff; } .day-section:first-of-type { break-before: auto; } .class-timeline-scroll { overflow: visible; } }
+
+.session-block {
+  transform: translateY(-2px);
+  box-shadow:
+    0 3px 0 rgba(255,255,255,0.98) inset,
+    0 -5px 0 rgba(48,36,112,0.36) inset,
+    3px 0 0 rgba(255,255,255,0.48) inset,
+    -3px 0 0 rgba(44,27,100,0.18) inset,
+    0 6px 0 var(--card-deep, #5a3a82),
+    0 8px 0 rgba(44,27,100,0.26),
+    0 12px 16px rgba(31,19,76,0.44),
+    0 0 11px rgba(255,255,255,0.34);
+}
+
+.session-block::before {
+  height: 48%;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.94),
+    rgba(255,255,255,0.10)
+  );
+}
+
+.session-block::after {
+  height: 6px;
+  background: rgba(34,18,82,0.34);
+  box-shadow: 0 -1px 0 rgba(255,255,255,0.26);
+}
+
+.session-block.is-source-only {
+  --card-fill: #fff2a6;
+  --card-shadow: #e4b950;
+  --card-border: #d59c27;
+  --card-deep: #8f5a14;
+  border-style: dotted;
+  background-color: #fff2a6;
+}
+
+.session-block.is-collision {
+  box-shadow:
+    0 3px 0 rgba(255,255,255,0.98) inset,
+    0 -5px 0 rgba(48,36,112,0.36) inset,
+    0 6px 0 #9d7c35,
+    0 8px 0 rgba(122,76,29,0.26),
+    0 12px 16px rgba(31,19,76,0.44);
+}
 </style>
   <!-- Gymnastics Vault icon -->
   <link rel="icon" type="image/png" href="icon.png">
