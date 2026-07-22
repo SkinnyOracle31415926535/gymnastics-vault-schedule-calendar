@@ -25,6 +25,7 @@
     --display: "Comic Sans MS", "Comic Neue", "Chalkboard SE", "Marker Felt", "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
     --retro-font: "Brush Script MT", "Segoe Script", "Apple Chancery", "Snell Roundhand", "Lucida Handwriting", cursive;
     --computer-font: "Trebuchet MS", "Lucida Grande", Verdana, Arial, sans-serif;
+    --table-font: Verdana, Geneva, Tahoma, Arial, sans-serif;
     --text-raise:
       0 1px 0 #fff9ff,
       0 2px 0 #ffacd9,
@@ -131,23 +132,23 @@
   .spectrum-dot { width: 29px; height: 29px; border: 2px solid #fffaff; border-radius: 50%; background: conic-gradient(#72e5ff, #8fb7ff, #b38eff, #ff91d7, #ffae9d, #72e5ff); box-shadow: 0 3px 0 rgba(93,69,169,0.35), 0 0 16px rgba(255,136,214,0.5); }
   .class-timeline-scroll { display: grid; grid-template-columns: 72px minmax(0, 1fr); min-width: 0; overflow-x: auto; overflow-y: visible; padding: 12px; background: linear-gradient(135deg, rgba(255,255,255,0.62), rgba(224,237,255,0.72) 60%, rgba(255,229,245,0.72)); }
   .class-time-axis { position: sticky; left: 0; z-index: 4; min-width: 72px; height: calc(var(--class-head-height) + var(--timeline-height)); border: 2px ridge #e0dbff; background: linear-gradient(180deg, #fffdf6, #e5f7ff); }
-  .class-time-axis::before { content: "TIME"; display: grid; place-items: center; height: var(--class-head-height); border-bottom: 2px solid rgba(133,109,214,0.5); color: #301866; font: 900 11px/1 var(--computer-font); }
-  .class-time-label { position: absolute; right: 5px; transform: translateY(-50%); color: #432467; font: 900 10px/1 var(--computer-font); white-space: nowrap; }
+  .class-time-axis::before { content: "TIME"; display: grid; place-items: center; height: var(--class-head-height); border-bottom: 2px solid rgba(133,109,214,0.5); color: #301866; font: 900 11px/1 var(--table-font); }
+  .class-time-label { position: absolute; right: 5px; transform: translateY(-50%); color: #432467; font: 900 10px/1 var(--table-font); white-space: nowrap; }
   .class-schedule-grid {
     --class-head-height: 46px;
     display: grid; grid-template-columns: repeat(var(--visible-class-count, 1), minmax(94px, 1fr)); gap: 0;
     width: max-content; min-width: 100%;
   }
   .class-track { position: relative; min-width: 0; height: calc(var(--class-head-height) + var(--timeline-height)); overflow: visible; border: 1px solid rgba(113,89,192,0.35); border-radius: 0; background: repeating-linear-gradient(to bottom, transparent 0 180px, rgba(113,89,192,0.2) 180px 181px), linear-gradient(180deg, rgba(255,255,255,0.9), rgba(228,238,255,0.72) 54%, rgba(255,231,246,0.66)); box-shadow: none; }
-  .class-head { display: grid; place-items: center; min-width: 0; height: var(--class-head-height); box-sizing: border-box; margin: 0; padding: 6px 4px; color: #301866; background: linear-gradient(180deg, #ffffff 0%, #8ceaff 24%, #a990ff 58%, #ff91d7 100%); border-bottom: 2px solid rgba(133,109,214,0.5); font-family: var(--retro-font); font-size: 18px; font-weight: 900; letter-spacing: -0.02em; overflow-wrap: anywhere; text-align: center; text-shadow: 0 1px 0 rgba(255,255,255,0.9), 0 2px 3px rgba(65,37,130,0.24); box-shadow: 0 2px 0 rgba(255,255,255,0.82) inset, 0 -3px 0 rgba(96,72,185,0.32) inset; cursor: pointer; touch-action: manipulation; }
+  .class-head { display: grid; place-items: center; min-width: 0; height: var(--class-head-height); box-sizing: border-box; margin: 0; padding: 6px 4px; color: #301866; background: linear-gradient(180deg, #ffffff 0%, #8ceaff 24%, #a990ff 58%, #ff91d7 100%); border-bottom: 2px solid rgba(133,109,214,0.5); font-family: var(--table-font); font-size: 18px; font-weight: 900; letter-spacing: -0.02em; overflow-wrap: anywhere; text-align: center; text-shadow: 0 1px 0 rgba(255,255,255,0.9), 0 2px 3px rgba(65,37,130,0.24); box-shadow: 0 2px 0 rgba(255,255,255,0.82) inset, 0 -3px 0 rgba(96,72,185,0.32) inset; cursor: pointer; touch-action: manipulation; }
   .class-head:focus-visible, .session-time:focus-visible { outline: 3px solid #fff7a8; outline-offset: -3px; }
   .session-block {
     position: absolute; left: 2px; right: 2px; box-sizing: border-box;
     min-width: 0; padding: 4px 18px 4px 5px; border: 0; border-left: 3px solid rgba(255,255,238,0.94);
-    background: linear-gradient(135deg, var(--c1), var(--c2)); color: #140b2c; font-family: var(--display); line-height: 1.15;
+    background: linear-gradient(135deg, var(--c1), var(--c2)); color: #140b2c; font-family: var(--table-font); line-height: 1.15;
     box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset;
   }
-  .session-time { display: block; min-width: 0; color: #432467; font-family: var(--computer-font); font-size: 10px; font-weight: 950; line-height: 1.1; overflow-wrap: anywhere; cursor: pointer; touch-action: manipulation; }
+  .session-time { display: block; min-width: 0; color: #432467; font-family: var(--table-font); font-size: 10px; font-weight: 950; line-height: 1.1; overflow-wrap: anywhere; cursor: pointer; touch-action: manipulation; }
   .session-block > strong, .session-block > span, .session-block > em { min-width: 0; display: block; overflow-wrap: anywhere; }
   .session-block > strong { margin-top: 2px; font-size: 11px; font-weight: 950; letter-spacing: -0.02em; }
   .session-block > span, .session-block > em { display: none; }
@@ -176,7 +177,7 @@
   .source-only summary span { color: #b015a6; font-weight: 700; }
   .source-only > p { margin: 0; padding: 0 13px 11px; font-size: 12px; line-height: 1.4; }
   .source-table-wrap { min-width: 0; overflow: visible; border-top: 1px solid var(--line); }
-  .source-only table { width: 100%; min-width: 0; table-layout: fixed; border-collapse: collapse; font-size: 12px; }
+  .source-only table { width: 100%; min-width: 0; table-layout: fixed; border-collapse: collapse; font-family: var(--table-font); font-size: 12px; }
   .source-only th, .source-only td { min-width: 0; padding: 8px 10px; overflow-wrap: anywhere; text-align: left; vertical-align: top; border-bottom: 1px solid rgba(113,89,192,0.14); }
   .source-only th { color: #34205f; background: rgba(228,238,255,0.68); font-size: 11px; letter-spacing: 0.02em; }
   .source-only td small { display: block; margin-top: 2px; color: #7a6d9e; }
